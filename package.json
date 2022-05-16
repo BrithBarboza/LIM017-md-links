@@ -1,7 +1,45 @@
 {
-  "name": "md-links",
-  "version": "0.1.0",
-  "engines": {
-    "node": ">=14.x"
-  }
+	"name": "@brith/md-links",
+	"version": "1.0.0",
+	"description": "Interfaz de línea de comando (CLI) que permite validar las URLs en los archivos markdown, recibe una ruta como argumento, analiza el archivo e imprime las URLs que encuentre.",
+	"keywords": [
+		"md-links",
+		"markdown",
+		"CLI",
+		"command-line interface",
+		"links",
+		"path"
+	],
+	"type": "module",
+	"author": "Briggtte Barboza Nieto <brith.19.04@gmail.com>",
+	"main": "src/index.js",
+	"engines": {
+		"node": ">=14.x"
+	},
+	"license": "ISC",
+	"repository": {
+		"type": "string",
+		"url": "git+https://github.com/BrithBarboza/LIM017-md-links.git"
+	},
+	"bugs": {
+		"url": "https://github.com/BrithBarboza/LIM017-md-links/issues"
+	},
+	"homepage": "https://github.com/BrithBarboza/LIM017-md-links#readme",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier --write .",
+		"lint": "eslint --fix .  --ext .js"
+	},
+	"devDependencies": {
+		"eslint": "^8.15.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-config-standard": "^17.0.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-n": "^15.2.0",
+		"eslint-plugin-promise": "^6.0.0",
+		"prettier": "^2.6.2"
+	}
 }
