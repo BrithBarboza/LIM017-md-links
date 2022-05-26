@@ -5,7 +5,7 @@ module.exports = {
 		jest: true,
 	},
 	extends: [
-	    'standard',
+		'standard',
 	    'eslint-config-prettier'
 	],
 	parserOptions: {
