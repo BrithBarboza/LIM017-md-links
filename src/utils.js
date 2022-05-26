@@ -40,15 +40,30 @@ export const filterbyExtension = arrayList => {
 };
 /* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
 
+// 9. Permite leer el contenido de los archivos.
+/* export const readFiles = argPath => fs.readFile(argPath);
+console.log(readFiles(process.argv[2])); */
+
+/* export const searchingLinks = listMd => {
+	let arrayList2 = [];
+	if (readFiles())
+}; */
 
 
 
-
-fs.readFile('files/archivo0.md', 'utf-8', (error, data) => {
+/* fs.readFile('files/archivo0.md', 'utf-8', (error, data) => {
 	if (!error) {
-		/* console.log(data); */
+		console.log(data);
 	} else {
 		// eslint-disable-next-line no-template-curly-in-string
-		/* console.log('Error: ${error}'); */
+		console.log('Error: ${error}');
 	}
-});
+}); */
+
+export const fileContentShow = (argPath) => { fs.readFile(argPath,'utf-8', (err, data) => {
+    if (err) throw err;
+    else{console.log(data)};
+	});
+};
+console.log(fileContentShow(process.argv[2]));
+
