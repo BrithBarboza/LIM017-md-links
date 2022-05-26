@@ -33,6 +33,16 @@ export const arrayListFile = argPath => {
 	return arrayList;
 };
 /* console.log(arrayListFile(process.argv[2])); */
+// 8. Filtro de archivos .md
+export const filterbyExtension = arrayList => {
+		const listMd = arrayList.filter((newFiles) => recognizePathExtension(newFiles) === '.md');
+		return listMd;
+};
+/* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
+
+
+
+
 
 fs.readFile('files/archivo0.md', 'utf-8', (error, data) => {
 	if (!error) {
