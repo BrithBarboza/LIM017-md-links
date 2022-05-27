@@ -35,35 +35,26 @@ export const arrayListFile = argPath => {
 /* console.log(arrayListFile(process.argv[2])); */
 // 8. Filtro de archivos .md
 export const filterbyExtension = arrayList => {
-		const listMd = arrayList.filter((newFiles) => recognizePathExtension(newFiles) === '.md');
-		return listMd;
+	const listMd = arrayList.filter(
+		newFiles => recognizePathExtension(newFiles) === '.md'
+	);
+	return listMd;
 };
 /* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
 
 // 9. Permite leer el contenido de los archivos.
-/* export const readFiles = argPath => fs.readFile(argPath);
-console.log(readFiles(process.argv[2])); */
-
-/* export const searchingLinks = listMd => {
+export const searchingLinks = argPath => {
+	const arrayListAll = arrayListFile(argPath);
+	const arrayListMd = filterbyExtension(arrayListAll);
+	/* const read = readFiles(); */
+	// console.log('mundo', arrayLisMd);
 	let arrayList2 = [];
-	if (readFiles())
-}; */
 
-
-
-/* fs.readFile('files/archivo0.md', 'utf-8', (error, data) => {
-	if (!error) {
-		console.log(data);
-	} else {
-		// eslint-disable-next-line no-template-curly-in-string
-		console.log('Error: ${error}');
+	if (arrayListMd.lenght > 0) {
+		arrayListMd.forEach(fileMd => {
+			const newArray = fs.readFileSync(fileMd, 'utf8');
+			console.log('Jammie', newArray);
+		});
 	}
-}); */
-
-export const fileContentShow = (argPath) => { fs.readFile(argPath,'utf-8', (err, data) => {
-    if (err) throw err;
-    else{console.log(data)};
-	});
 };
-console.log(fileContentShow(process.argv[2]));
-
+console.log('holi', searchingLinks(process.argv[2]));
