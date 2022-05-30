@@ -42,19 +42,34 @@ export const filterbyExtension = arrayList => {
 };
 /* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
 
-// 9. Permite leer el contenido de los archivos.
+// 9. Permite obtener los links de los archivos y el array con href, text, file
 export const searchingLinks = argPath => {
 	const arrayListAll = arrayListFile(argPath);
 	const arrayListMd = filterbyExtension(arrayListAll);
-	/* const read = readFiles(); */
-	// console.log('mundo', arrayLisMd);
+	const fullLinkOnlyRegex = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gm;
+	const regExpURL = /\(((?:\/|https?:\/\/).*)\)/g;
+	const regExpText = /\[(.*)\]/g;
 	let arrayList2 = [];
-
-	if (arrayListMd.lenght > 0) {
+	if (arrayListMd.length > 0) {
 		arrayListMd.forEach(fileMd => {
-			const newArray = fs.readFileSync(fileMd, 'utf8');
-			console.log('Jammie', newArray);
+			const readContentFile = fs.readFileSync(fileMd, 'utf8');
+			const getLinks = readContentFile.match(fullLinkOnlyRegex);
+
+			if (getLinks) {
+				const destructureLink = getLinks.map(link => {
+					const onlyLinkReturn = link.match(regExpURL).join().slice(1, -1);
+					const onlyTextReturn = link.match(regExpText).join().slice(1, -1).substring(0, 50);
+					return { /* esta fx flecha permite retornar un objeto sin necesidad de declararlo */
+						href: onlyLinkReturn,
+						text: onlyTextReturn,
+						file: transformPathAbsolute(fileMd),
+					};
+				});
+				arrayList2 = arrayList2.concat(destructureLink);
+				/* console.log('pruebita', arrayList2); */
+			}
 		});
+		return arrayList2;
 	}
 };
-console.log('holi', searchingLinks(process.argv[2]));
+/* console.log('holi', searchingLinks(process.argv[2])); */
