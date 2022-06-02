@@ -92,7 +92,7 @@ describe('filterbyExtension', () => {
 describe('searchingLinks', () => {
 	const fourthArrayTest = [
 		{
-		  href: 'https://www.youtube.com/watch?v=Lub5qOmY4JQ',
+		  href: 'https://www.youtbe.com/watch?v=Lub5qOmY4JQ',
 		  text: 'Si nunca has hecho un diagrama de flujo revisa est',
 		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
 		}
