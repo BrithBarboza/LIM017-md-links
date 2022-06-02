@@ -33,12 +33,43 @@ export const arrayListFile = argPath => {
 	return arrayList;
 };
 /* console.log(arrayListFile(process.argv[2])); */
+// 8. Filtro de archivos .md
+export const filterbyExtension = arrayList => {
+	const listMd = arrayList.filter(
+		newFiles => recognizePathExtension(newFiles) === '.md'
+	);
+	return listMd;
+};
+/* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
 
-fs.readFile('files/archivo0.md', 'utf-8', (error, data) => {
-	if (!error) {
-		/* console.log(data); */
-	} else {
-		// eslint-disable-next-line no-template-curly-in-string
-		/* console.log('Error: ${error}'); */
+// 9. Permite obtener los links de los archivos y el array con href, text, file
+export const searchingLinks = argPath => {
+	const arrayListAll = arrayListFile(argPath);
+	const arrayListMd = filterbyExtension(arrayListAll);
+	const fullLinkOnlyRegex = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gm;
+	const regExpURL = /\(((?:\/|https?:\/\/).*)\)/g;
+	const regExpText = /\[(.*)\]/g;
+	let arrayList2 = [];
+	if (arrayListMd.length > 0) {
+		arrayListMd.forEach(fileMd => {
+			const readContentFile = fs.readFileSync(fileMd, 'utf8');
+			const getLinks = readContentFile.match(fullLinkOnlyRegex);
+
+			if (getLinks) {
+				const destructureLink = getLinks.map(link => {
+					const onlyLinkReturn = link.match(regExpURL).join().slice(1, -1);
+					const onlyTextReturn = link.match(regExpText).join().slice(1, -1).substring(0, 50);
+					return { /* esta fx flecha permite retornar un objeto sin necesidad de declararlo */
+						href: onlyLinkReturn,
+						text: onlyTextReturn,
+						file: transformPathAbsolute(fileMd),
+					};
+				});
+				arrayList2 = arrayList2.concat(destructureLink);
+				/* console.log('pruebita', arrayList2); */
+			}
+		});
+		return arrayList2;
 	}
-});
+};
+/* console.log('holi', searchingLinks(process.argv[2])); */

@@ -6,6 +6,8 @@ import {
 	recognizePathExtension,
 	readDirectory,
 	arrayListFile,
+	filterbyExtension,
+	searchingLinks
 } from '../src/utils.js';
 const pathTest =
 	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\README.md';
@@ -42,14 +44,18 @@ describe('recognizePathExtension', () => {
 });
 
 describe('readDirectory', () => {
-	const FirstDirectoryTest = ['archivo0.md', 'folder1', 'folder2'];
+	const firstDirectoryTest = [
+		'archivo0.md',
+	    'folder1',
+	    'folder2'
+	];
 	it('verify that is directory', () => {
-		expect(readDirectory('./files')).toEqual(FirstDirectoryTest);
+		expect(readDirectory('./files')).toEqual(firstDirectoryTest);
 	});
 });
 
 describe('arrayListFile', () => {
-	const SecondDirectoryTest = [
+	const secondDirectoryTest = [
 		'files\\archivo0.md',
 		'files\\folder1\\archivo1.md',
 		'files\\folder1\\archivo2.md',
@@ -57,6 +63,45 @@ describe('arrayListFile', () => {
 		'files\\folder2\\prueba.js',
 	];
 	it('Traverse the directory return list of File', () => {
-		expect(arrayListFile('files')).toEqual(SecondDirectoryTest);
+		expect(arrayListFile('files')).toEqual(secondDirectoryTest);
 	});
+});
+
+describe('filterbyExtension', () => {
+	const filesInicial = [
+		'files\\archivo0.md',
+		'files\\folder1\\archivo1.md',
+		'files\\folder1\\archivo2.md',
+		'files\\folder2\\archivo3.md',
+		'files\\folder2\\prueba.js',
+	];
+
+	const thirdArrayTest = [
+		'files\\archivo0.md',
+		'files\\folder1\\archivo1.md',
+		'files\\folder1\\archivo2.md',
+		'files\\folder2\\archivo3.md'
+	];
+	it('Filter files by .md extension', () => {
+		expect(filterbyExtension(filesInicial)).toEqual(thirdArrayTest);
+	});
+});
+
+describe('searchingLinks', () => {
+	const fourthArrayTest = [
+		{
+		  href: 'https://www.youtube.com/watch?v=Lub5qOmY4JQ',
+		  text: 'Si nunca has hecho un diagrama de flujo revisa est',
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
+		}
+	  ]
+
+	it('Searching links and get object', () => {
+		expect(searchingLinks('./files/folder2')).toEqual(fourthArrayTest);
+	});
+
+	it('If there is not link, return empty object', () => {
+		expect(searchingLinks('./files/folder2')).toBe([]);
+	});
+
 });
