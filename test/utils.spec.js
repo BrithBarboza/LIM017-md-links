@@ -10,7 +10,7 @@ import {
 	searchingLinks
 } from '../src/utils.js';
 const pathTest =
-	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\README.md';
+	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\README.md';
 
 describe('transformPathAbsolute', () => {
 	it('shoul resolve path in windows', () => {
@@ -47,7 +47,9 @@ describe('readDirectory', () => {
 	const firstDirectoryTest = [
 		'archivo0.md',
 	    'folder1',
-	    'folder2'
+	    'folder2',
+		'folder3',
+		'folder4',
 	];
 	it('verify that is directory', () => {
 		expect(readDirectory('./files')).toEqual(firstDirectoryTest);
@@ -61,6 +63,7 @@ describe('arrayListFile', () => {
 		'files\\folder1\\archivo2.md',
 		'files\\folder2\\archivo3.md',
 		'files\\folder2\\prueba.js',
+		'files\\folder3\\archivo4.md',
 	];
 	it('Traverse the directory return list of File', () => {
 		expect(arrayListFile('files')).toEqual(secondDirectoryTest);
@@ -90,9 +93,9 @@ describe('filterbyExtension', () => {
 describe('searchingLinks', () => {
 	const fourthArrayTest = [
 		{
-		  href: 'https://www.youtube.com/watch?v=Lub5qOmY4JQ',
+		  href: 'https://www.youtbe.com/watch?v=Lub5qOmY4JQ',
 		  text: 'Si nunca has hecho un diagrama de flujo revisa est',
-		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
 		}
 	  ]
 
@@ -101,7 +104,7 @@ describe('searchingLinks', () => {
 	});
 
 	it('If there is not link, return empty object', () => {
-		expect(searchingLinks('./files/folder2')).toBe([]);
+		expect(searchingLinks('./files/folder3')).toEqual([]);
 	});
 
 });
