@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 // 1. Convertir una ruta relativa en absoluta
-// isAbsolute: Verifica si la ruta es absoluta // resolve: Convierte una ruta relativa en una absoluta
 export const transformPathAbsolute = argPath =>
 	path.isAbsolute(argPath) ? argPath : path.resolve(argPath);
 // console.log(transformPathAbsolute(process.argv[2]));
@@ -59,14 +58,13 @@ export const searchingLinks = argPath => {
 				const destructureLink = getLinks.map(link => {
 					const onlyLinkReturn = link.match(regExpURL).join().slice(1, -1);
 					const onlyTextReturn = link.match(regExpText).join().slice(1, -1).substring(0, 50);
-					return { /* esta fx flecha permite retornar un objeto sin necesidad de declararlo */
+					return {
 						href: onlyLinkReturn,
 						text: onlyTextReturn,
 						file: transformPathAbsolute(fileMd),
 					};
 				});
 				arrayList2 = arrayList2.concat(destructureLink);
-				/* console.log('pruebita', arrayList2); */
 			}
 		});
 		return arrayList2;

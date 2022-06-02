@@ -1,12 +1,10 @@
-import { transformPathAbsolute } from './utils.js';
+import { transformPathAbsolute, verifyPathExist } from './utils.js';
 
-// isAbsolute = Verifica si la ruta es absoluta
-// resolve = Convierte una ruta relativa en una absoluta
+const mdLinks = (argPath, options) =>
+	new Promise((resolve, reject) => {
+		if (verifyPathExist(argPath)) {
+			transformPathAbsolute(argPath);
+		}
+	});
 
-const mdLinks = (argPath, options) => {
-	if (!argPath) {
-		return console.log('Ingrese un path');
-	}
-	return console.log(transformPathAbsolute(argPath));
-};
 mdLinks(process.argv[2]);
