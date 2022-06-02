@@ -10,7 +10,7 @@ import {
 	searchingLinks
 } from '../src/utils.js';
 const pathTest =
-	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\README.md';
+	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\README.md';
 
 describe('transformPathAbsolute', () => {
 	it('shoul resolve path in windows', () => {
@@ -49,6 +49,7 @@ describe('readDirectory', () => {
 	    'folder1',
 	    'folder2',
 		'folder3',
+		'folder4',
 	];
 	it('verify that is directory', () => {
 		expect(readDirectory('./files')).toEqual(firstDirectoryTest);
@@ -94,7 +95,7 @@ describe('searchingLinks', () => {
 		{
 		  href: 'https://www.youtbe.com/watch?v=Lub5qOmY4JQ',
 		  text: 'Si nunca has hecho un diagrama de flujo revisa est',
-		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
 		}
 	  ]
 
