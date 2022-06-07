@@ -71,3 +71,90 @@ export const searchingLinks = argPath => {
 	}
 };
 /* console.log('holi', searchingLinks(process.argv[2])); */
+
+// 11. Return de option: stats
+export const infoStats = (arrayListOfValidate) => {
+	    const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
+		console.log(`Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size}`);
+}
+
+export const totalInfo = (arrayListOfValidate) => {
+	const brokenLinks = arrayListOfValidate.filter((element) => element.message === 'Fail');
+	const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
+	console.log(`Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size} \nBroken Links:  ${brokenLinks.size}`);
+}
+
+const bri = [
+	{
+	  href: 'https://www.google.com/',
+	  text: '1° link',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'https://www.googl.com/',
+	  text: '2° link',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+	  status: 500,
+	  message: 'Fail'
+	},
+	{
+	  href: 'https://es.wikpedia.org/wiki/Node.js',
+	  text: 'Node.js - Wikipedia',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo1.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'https://nodejs.org/es/about/',
+	  text: 'Acerca de Node.js - Documentación oficial',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo1.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'http://www.edu4java.com/es/web/web30.html',
+	  text: 'Enlace no seguro',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo1.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+		href: 'http://www.edu4java.com/es/web/web30.html',
+		text: 'Enlace no seguro',
+		file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo1.md',
+		status: 200,
+		message: 'Ok'
+	  },
+	{
+	  href: 'https://github.com/workshopper/learnyounode',
+	  text: 'learnyounode',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo2.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'https://github.com/workshopper/how-to-npm',
+	  text: 'how-to-npm',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo2.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'https://github.com/stevekane/promise-it-wont-hurt',
+	  text: 'promise-it-wont-hurt',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder1\\archivo2.md',
+	  status: 200,
+	  message: 'Ok'
+	},
+	{
+	  href: 'https://www.youtbe.com/watch?v=Lub5qOmY4JQ',
+	  text: 'Si nunca has hecho un diagrama de flujo revisa est',
+	  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md',
+	  status: 500,
+	  message: 'Fail'
+	}
+  ]
+
+  console.log(infoStats(bri)); 
