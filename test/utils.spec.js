@@ -11,18 +11,20 @@ import {
 	infoStats,
 	totalInfo
 } from '../src/utils.js';
-const pathTest =
-	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\README.md';
 
 describe('transformPathAbsolute', () => {
 	it('shoul resolve path in windows', () => {
-		expect(transformPathAbsolute('README.md')).toBe(pathTest);
+		expect(transformPathAbsolute('README.md')).toBe('C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\README.md');
 	});
 });
 
 describe('verifyPathExist', () => {
 	it('verify that path exist', () => {
-		expect(verifyPathExist(pathTest)).toBe(true);
+		expect(verifyPathExist('README.md')).toBe(true);
+	});
+	it('If path doesnt exist: Show err', () => {
+		const roote = 'README.js';
+		expect(verifyPathExist(roote)).toEqual(false);
 	});
 });
 
@@ -30,11 +32,17 @@ describe('verifyIsFile', () => {
 	it('verify that is file', () => {
 		expect(verifyIsFile('README.md')).toBe(true);
 	});
+	it('If is not a file: return false', () => {
+		expect(verifyIsFile('./src')).toEqual(false);
+	});
 });
 
 describe('verifyIsDirectory', () => {
 	it('verify that is directory', () => {
 		expect(verifyIsDirectory('./files')).toBe(true);
+	});
+	it('If is not a directory: return false', () => {
+		expect(verifyIsDirectory('README.md')).toEqual(false);
 	});
 });
 

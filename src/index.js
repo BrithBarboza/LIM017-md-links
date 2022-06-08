@@ -11,9 +11,6 @@ import {
 } from '../src/utils.js';
 import { getStatusLinks } from '../src/validate.js'
 
-
-
-
 export const mdLinks = (argPath, options = { validate: false, stats: false }) => {
     return new Promise((resolve, reject) => {
         if (verifyPathExist(argPath)) {
@@ -52,13 +49,8 @@ export const mdLinks = (argPath, options = { validate: false, stats: false }) =>
             } else {
                 reject('No se ha encontrado ningún link.');
             }
-           //  console.log('Bri', getStatusLinks(arrayContent).then((res) => resolve(totalInfo(res, options))));
         } else {
             reject('La ruta ingresada no existe.');
         }
-
     });
 }
-/* mdLinks(process.argv[2],)
-    .then((res) => { console.log(res) })
-    .catch((error) => { console.log(error) }); */
