@@ -17,6 +17,9 @@
 		"node": ">=14.x"
 	},
 	"license": "ISC",
+	"bin":{
+		"md-links": "./src/cli.js"
+	},
 	"repository": {
 		"type": "string",
 		"url": "git+https://github.com/BrithBarboza/LIM017-md-links.git"

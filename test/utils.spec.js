@@ -7,14 +7,15 @@ import {
 	readDirectory,
 	arrayListFile,
 	filterbyExtension,
-	searchingLinks
+	searchingLinks,
+	infoStats,
+	totalInfo
 } from '../src/utils.js';
 const pathTest =
 	'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos-Laboratoria\\LIM017-md-links\\README.md';
 
 describe('transformPathAbsolute', () => {
 	it('shoul resolve path in windows', () => {
-		console.log(transformPathAbsolute('README.md'));
 		expect(transformPathAbsolute('README.md')).toBe(pathTest);
 	});
 });
@@ -108,3 +109,52 @@ describe('searchingLinks', () => {
 	});
 
 });
+
+describe('Get infoStats to file', ()=>{
+	const bri = [
+		{
+		  href: 'https://www.google.com/',
+		  text: '1° link',
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+		  status: 200,
+		  message: 'Ok'
+		},
+		{
+		  href: 'https://www.googl.com/',
+		  text: '2° link',
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+		  status: 500,
+		  message: 'Fail'
+		}
+	  ]; 
+	  
+	  const result = `Total Links: ${2} \nUnique Links:  ${2}`;
+	it('Get infoStats', () => {
+		expect(infoStats(bri)).toEqual(result)
+	})
+})
+
+describe('Get totalInfo to file', ()=>{
+	const bri = [
+		{
+		  href: 'https://www.google.com/',
+		  text: '1° link',
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+		  status: 200,
+		  message: 'Ok'
+		},
+		{
+		  href: 'https://www.googl.com/',
+		  text: '2° link',
+		  file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\archivo0.md',
+		  status: 500,
+		  message: 'Fail'
+		}
+	  ]; 
+	  
+	  const result = `Total Links: ${2} \nUnique Links:  ${2} \nBroken Links:  ${1}`;
+	it('Get totalInfo', () => {
+		expect(totalInfo(bri)).toEqual(result)
+	})
+})
+

@@ -73,5 +73,5 @@ export const getStatusLinks = arrayLinks => {
     text: 'Si nunca has hecho un diagrama de flujo revisa est',
     file: 'C:\\Users\\almen\\OneDrive\\Escritorio\\Proyectos Laboratoria\\LIM017-md-links\\files\\folder2\\archivo3.md'
   }
-]; */
-/* console.log(getStatusLinks(arr)); */
+];
+console.log(getStatusLinks(arr)); */

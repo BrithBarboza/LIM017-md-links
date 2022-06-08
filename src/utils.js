@@ -72,19 +72,21 @@ export const searchingLinks = argPath => {
 };
 /* console.log('holi', searchingLinks(process.argv[2])); */
 
-// 11. Return de option: stats
+// 11. Return de option: stats y total
 export const infoStats = (arrayListOfValidate) => {
 	    const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
-		console.log(`Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size}`);
+		const result = `Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size}`;
+		return result;
 }
 
 export const totalInfo = (arrayListOfValidate) => {
-	const brokenLinks = arrayListOfValidate.filter((element) => element.message === 'Fail');
+	const brokenLinks = new Set(arrayListOfValidate.filter((element) => element.message === 'Fail'));
 	const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
-	console.log(`Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size} \nBroken Links:  ${brokenLinks.size}`);
+	const totalResult = `Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size} \nBroken Links:  ${brokenLinks.size}`;
+	return totalResult;
 }
 
-const bri = [
+/* const bri = [
 	{
 	  href: 'https://www.google.com/',
 	  text: '1° link',
@@ -155,6 +157,6 @@ const bri = [
 	  status: 500,
 	  message: 'Fail'
 	}
-  ]
+  ] */
 
-  console.log(infoStats(bri)); 
+  // console.log(infoStats(bri)); 

@@ -9,49 +9,56 @@ import {
     infoStats,
     totalInfo
 } from '../src/utils.js';
-import {getStatusLinks} from '../src/validate.js'
+import { getStatusLinks } from '../src/validate.js'
 
-const mdLinks = (argPath, options = {validate: false, stats: false}) => {
+
+
+
+export const mdLinks = (argPath, options = { validate: false, stats: false }) => {
     return new Promise((resolve, reject) => {
-        let arrayContent = [];
-        if (verifyPathExist(argPath) === true) {
+        if (verifyPathExist(argPath)) {
+            let arrayContent = [];
             argPath = transformPathAbsolute(argPath);
-            if (verifyIsDirectory(argPath) === true) {
+            if (verifyIsDirectory(argPath)) {
                 const listFileOfDirectory = arrayListFile(argPath);
                 if (listFileOfDirectory.length > 0) {
                     const filesMd = filterbyExtension(listFileOfDirectory);
-                    if(filesMd.length > 0){
+                    if (filesMd.length > 0) {
                         const arrayContent2 = searchingLinks(argPath);
                         arrayContent = arrayContent2;
-                    }else{
-                        reject('El archivo no contiene links.');
+                    } else {
+                        reject('No existen archivos Markdown(.md)');
                     }
-                    return arrayContent;
-                    /* console.log(arrayContent); */
                 } else {
-                    reject('No existen archivos Markdown(.md)');
+                    reject('No existen archivos en el directorio');
                 }
-            } else{
+            } else {
                 reject('La ruta ingresada no es un directorio. Ingrese una válida.');
             }
+
+            if (arrayContent.length > 0) {
+                if (options.validate && options.stats) {
+                    getStatusLinks(arrayContent)
+                        .then((res) => resolve(totalInfo(res, options)));
+                } else if (options.validate && !options.stats) {
+                    getStatusLinks(arrayContent)
+                        .then((res) => resolve(res));
+                } else if (!options.validate && options.stats) {
+                    getStatusLinks(arrayContent)
+                        .then((res) => resolve(infoStats(res, options)));
+                } else {
+                    resolve(arrayContent);
+                }
+            } else {
+                reject('No se ha encontrado ningún link.');
+            }
+           //  console.log('Bri', getStatusLinks(arrayContent).then((res) => resolve(totalInfo(res, options))));
         } else {
             reject('La ruta ingresada no existe.');
         }
-        /* console.log(arrayContent); */
-        // If de validate y stats
-        if (arrayContent.length > 0) {
-            if (options.validate === true && options.stats === false){
-                resolve(getStatusLinks(arrayContent));
-            } else if (options.validate === false && options.stats === true){
-                resolve(infoStats(arrayContent));
-            } else if (options.validate === true && options.stats === true){
-                resolve(totalInfo(arrayContent));
-            } else {
-                reject('Holi');
-            }
-        }
+
     });
 }
-mdLinks(process.argv[2])
+/* mdLinks(process.argv[2],)
     .then((res) => { console.log(res) })
-    .catch((error) => { console.log(error) });
+    .catch((error) => { console.log(error) }); */
