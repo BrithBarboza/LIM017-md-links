@@ -1,7 +1,7 @@
 {
-	"name": "@brith/md-links",
+	"name": "md-links-brith",
 	"version": "1.0.0",
-	"description": "Interfaz de línea de comando (CLI) que permite validar las URLs en los archivos markdown, recibe una ruta como argumento, analiza el archivo e imprime las URLs que encuentre.",
+	"description": "Interfaz de línea de comando (CLI) que permite validar las URLs en los archivos markdown, recibe una ruta como argumento, analiza el contenido y retorna los estados de las URL encontradas.",
 	"keywords": [
 		"md-links",
 		"markdown",
@@ -17,6 +17,9 @@
 		"node": ">=14.x"
 	},
 	"license": "ISC",
+	"bin": {
+		"md-links": "./src/cli.js"
+	},
 	"repository": {
 		"type": "string",
 		"url": "git+https://github.com/BrithBarboza/LIM017-md-links.git"
@@ -44,6 +47,7 @@
 		"prettier": "^2.6.2"
 	},
 	"dependencies": {
+		"chalk": "^5.0.1",
 		"jest": "^28.1.0",
 		"node-fetch": "^3.2.4"
 	}

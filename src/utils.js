@@ -1,24 +1,20 @@
 import path from 'path';
 import fs from 'fs';
-// 1. Convertir una ruta relativa en absoluta
+
 export const transformPathAbsolute = argPath =>
 	path.isAbsolute(argPath) ? argPath : path.resolve(argPath);
-// console.log(transformPathAbsolute(process.argv[2]));
-// 2. Verficar la existencia de la ruta
+
 export const verifyPathExist = argPath =>
 	fs.existsSync(transformPathAbsolute(argPath));
-// console.log(transformPathAbsolute(process.argv[2]));
-// 3. Verificar que sea archivo
+
 export const verifyIsFile = argPath => fs.lstatSync(argPath).isFile();
-// 4. Verificar que sea directorio
+
 export const verifyIsDirectory = argPath => fs.lstatSync(argPath).isDirectory();
-// console.log(verifyIsDirectory(process.argv[2]));
-// 5. Identifiar la extensión de la ruta
+
 export const recognizePathExtension = argPath => path.extname(argPath);
-// 6. Permite leer los archivos de un directorio retornadolos en un array
+
 export const readDirectory = argPath => fs.readdirSync(argPath);
 
-// 7. Recorrer el directorio
 export const arrayListFile = argPath => {
 	let arrayList = [];
 	if (verifyIsDirectory(argPath) === false) {
@@ -31,17 +27,14 @@ export const arrayListFile = argPath => {
 	}
 	return arrayList;
 };
-/* console.log(arrayListFile(process.argv[2])); */
-// 8. Filtro de archivos .md
+
 export const filterbyExtension = arrayList => {
 	const listMd = arrayList.filter(
 		newFiles => recognizePathExtension(newFiles) === '.md'
 	);
 	return listMd;
 };
-/* console.log(filterbyExtension(arrayListFile(process.argv[2]))); */
 
-// 9. Permite obtener los links de los archivos y el array con href, text, file
 export const searchingLinks = argPath => {
 	const arrayListAll = arrayListFile(argPath);
 	const arrayListMd = filterbyExtension(arrayListAll);
@@ -70,4 +63,16 @@ export const searchingLinks = argPath => {
 		return arrayList2;
 	}
 };
-/* console.log('holi', searchingLinks(process.argv[2])); */
+
+export const infoStats = (arrayListOfValidate) => {
+	    const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
+		const result = `Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size}`;
+		return result;
+}
+
+export const totalInfo = (arrayListOfValidate) => {
+	const brokenLinks = new Set(arrayListOfValidate.filter((element) => element.message === 'Fail'));
+	const uniqueLinks = new Set(arrayListOfValidate.map((element) => element.href));
+	const totalResult = `Total Links: ${arrayListOfValidate.length} \nUnique Links:  ${uniqueLinks.size} \nBroken Links:  ${brokenLinks.size}`;
+	return totalResult;
+}
